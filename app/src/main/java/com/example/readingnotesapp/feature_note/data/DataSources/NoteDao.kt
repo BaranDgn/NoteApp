@@ -1,4 +1,4 @@
-package com.example.readingnotesapp.feature_note.data.data_source
+package com.example.readingnotesapp.feature_note.data.DataSources
 
 import androidx.room.*
 import com.example.readingnotesapp.feature_note.data.model.Note

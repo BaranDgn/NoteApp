@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.readingnotesapp.feature_note.presentation.add_edit_note.AddEditNoteScreen
+import com.example.readingnotesapp.feature_note.presentation.AddEditNote.AddEditNoteScreen
 import com.example.readingnotesapp.feature_note.presentation.notes.components.NoteScreen
 import com.example.readingnotesapp.feature_note.presentation.util.Screen
 import com.example.readingnotesapp.ui.theme.ReadingNotesAppTheme

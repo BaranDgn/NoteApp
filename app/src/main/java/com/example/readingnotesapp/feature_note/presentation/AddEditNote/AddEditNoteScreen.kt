@@ -1,9 +1,7 @@
-package com.example.readingnotesapp.feature_note.presentation.add_edit_note
+package com.example.readingnotesapp.feature_note.presentation.AddEditNote
 
 import android.annotation.SuppressLint
-import android.widget.Space
 import androidx.compose.animation.*
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,13 +20,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.readingnotesapp.feature_note.data.model.Note
-import com.example.readingnotesapp.feature_note.presentation.notes.NoteEvent
-import com.example.readingnotesapp.feature_note.presentation.notes.components.OrderSection
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

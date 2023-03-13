@@ -1,4 +1,4 @@
-package com.example.readingnotesapp.feature_note.presentation.add_edit_note
+package com.example.readingnotesapp.feature_note.presentation.AddEditNote
 
 data class NoteTextFieldState(
     val text: String = "",
