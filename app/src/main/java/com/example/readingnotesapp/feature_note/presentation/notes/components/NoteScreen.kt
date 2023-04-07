@@ -2,7 +2,6 @@ package com.example.readingnotesapp.feature_note.presentation.notes.components
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,7 +10,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -19,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.readingnotesapp.feature_note.data.model.Note
 import com.example.readingnotesapp.feature_note.presentation.notes.NoteEvent
 import com.example.readingnotesapp.feature_note.presentation.notes.NoteViewModel
 import com.example.readingnotesapp.feature_note.presentation.util.Screen
@@ -51,7 +48,7 @@ fun NoteScreen(
     ){
 
             Column(
-                modifier = androidx.compose.ui.Modifier
+                modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
             ){
@@ -79,7 +76,7 @@ fun NoteScreen(
                 exit = fadeOut() + slideOutVertically()
             ) {
                 OrderSection(
-                    modifier = androidx.compose.ui.Modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
                     noteOrder = state.noteOrder,
@@ -87,19 +84,21 @@ fun NoteScreen(
                         viewModel.onEvent(NoteEvent.Order(it))
                     })
             }
-                Spacer(modifier = androidx.compose.ui.Modifier.height(16.dp))
-                LazyColumn(modifier = androidx.compose.ui.Modifier.fillMaxSize()){
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyColumn(modifier = Modifier.fillMaxSize()){
                     items(state.notes){note ->
                         NoteItem(
                             note = note,
-                            modifier = androidx.compose.ui.Modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    //Navigation
-                                           navController.navigate(
-                                               Screen.AddEditNoteScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
-                                           )
+                                    navController.navigate(
+                                        Screen.AddEditNoteScreen.route +
+                                                "?noteId=${note.id}&noteColor=${note.color}"
+                                    )
+
                                 },
+
                             onDeleteClick = {
                                 viewModel.onEvent(NoteEvent.DeleteNote(note))
                                 scope.launch {

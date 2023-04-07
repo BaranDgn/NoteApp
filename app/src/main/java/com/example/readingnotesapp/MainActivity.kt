@@ -1,5 +1,6 @@
 package com.example.readingnotesapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,12 +8,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.readingnotesapp.feature_note.presentation.AddEditNote.AddEditNoteScreen
+import com.example.readingnotesapp.feature_note.presentation.AddEditNote.ShareNote
 import com.example.readingnotesapp.feature_note.presentation.notes.components.NoteScreen
 import com.example.readingnotesapp.feature_note.presentation.util.Screen
 import com.example.readingnotesapp.ui.theme.ReadingNotesAppTheme
@@ -59,7 +62,18 @@ class MainActivity : ComponentActivity() {
                            val color = it.arguments?.getInt("noteColor") ?: -1
                             AddEditNoteScreen(
                                 navController = navController,
-                                noteColor = color)
+                                noteColor = color,
+                                onShareClick = { title, content ->
+                                    val sendIntent: Intent = Intent().apply {
+                                    action = Intent.ACTION_SEND
+                                    putExtra(Intent.EXTRA_TEXT, title)
+                                    putExtra(Intent.EXTRA_TEXT, content)
+                                    type = "text/plain"
+                                }
+                                    val shareIntent = Intent.createChooser(sendIntent, null)
+                                    startActivity(shareIntent)
+                                }
+                            )
                        }
                    }
                }

@@ -2,6 +2,7 @@ package com.example.readingnotesapp.feature_note.presentation.AddEditNote
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.*
+import androidx.compose.animation.core.StartOffset
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,29 +11,32 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.readingnotesapp.feature_note.data.model.Note
+import com.example.readingnotesapp.feature_note.presentation.notes.NoteEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.w3c.dom.Node
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
     noteColor: Int,
-    viewModel: AddEditNoteViewModel = hiltViewModel()
+    viewModel: AddEditNoteViewModel = hiltViewModel(),
+    onShareClick: (String, String) -> Unit
 ){
     val titleState = viewModel.noteTitle.value
     val contentState = viewModel.noteContent.value
@@ -119,6 +123,17 @@ fun AddEditNoteScreen(
                     }
                 }
 
+
+                IconButton(
+                    onClick = { onShareClick(titleState.toString(), contentState.toString()) },
+                    modifier = Modifier
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription ="Share Note"
+                    )
+                }
+
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -139,7 +154,7 @@ fun AddEditNoteScreen(
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = contentState.text,
-                hint = contentState.hint ,
+                hint = contentState.hint,
                 onValueChange = {
                     viewModel.onEvent(AddEditNoteEvent.EnteredContent(it))
                 },
@@ -155,3 +170,4 @@ fun AddEditNoteScreen(
 
     }
 }
+

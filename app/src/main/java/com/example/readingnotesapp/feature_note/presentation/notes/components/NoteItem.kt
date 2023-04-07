@@ -32,7 +32,7 @@ fun NoteItem(
     onDeleteClick:() -> Unit
 ){
     Box(
-        modifier = Modifier
+        modifier = modifier
     ){
         Canvas(
             //matchParentSize: This will give our canvas the size
